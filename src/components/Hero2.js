@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MovieDetails from './MovieDetails'
+// import MovieDetails from './MovieDetails'
 import MovieDetails2 from './MovieDetails2';
 
 const Hero = ({ moviePosters }) => {
