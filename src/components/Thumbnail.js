@@ -17,6 +17,8 @@ const Thumbnail = ({ movie }) => {
     }
   }, [isMovieInWishlist, addToWishlist, removeFromWishlist, movie]);
 
+  const thumbnailSize = getThumbnailSize(); // Fonksiyonu ekledik
+
   return (
     <div className="relative h-28 min-w-[180px] ...">
       <div className="right-3 top-3 absolute z-10">
@@ -30,7 +32,7 @@ const Thumbnail = ({ movie }) => {
         <Link href={`/${movie.id}`} passHref>
           <div onClick={handleThumbnailClick}>
             <Image
-              src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
+              src={`https://image.tmdb.org/t/p/${thumbnailSize}${movie.backdrop_path || movie.poster_path}`}
               className="rounded-sm object-cover md:rounded w-full h-full"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -44,6 +46,12 @@ const Thumbnail = ({ movie }) => {
       </div>
     </div>
   );
+};
+
+// Ana sayfa URL'sine göre thumbnail boyutunu belirleyen fonksiyon
+const getThumbnailSize = () => {
+  const isHomePage = window.location.pathname === '/';
+  return isHomePage ? 'w300' : 'w500'; // Ana sayfa ise w300, değilse w500 kullan
 };
 
 export default Thumbnail;

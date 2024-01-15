@@ -9,8 +9,11 @@ const MyList = () => {
   return (
     <div className="mt-16">
       <Navbar />
-      <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <h1 className="text-2xl font-bold mb-4">My List</h1> {/* Yeni eklenen satır */}
+      <h1 className="text-2xl font-bold mb-4" style={{ marginBottom: '26px' }}>
+        My List
+      </h1>
+
+      <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {selectedMovies.map((movie) => (
           <Thumbnail key={movie.id} movie={movie} />
         ))}
