@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import requests from "@/utils/requests";
-import Hero2 from '@/components/Hero2'; 
+import Hero2 from '@/components/Hero2';
 import Row from '@/components/Row';
+import { WishlistProvider } from '@/components/WishlistContext';
+import MyList from './MyList';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,18 +27,19 @@ export default function Home({
       </Head>
 
       <main className='relative bg-gradient-to-b from-gray-900/10 to-[#010511]'>
-      
-        <Hero2 moviePosters={moviePosters} />   
+        
+          <Hero2 moviePosters={moviePosters} />
+         
+          <section className="container pb-32">
+            <Row title="Trending Now" movies={trendingNow} />
+            <Row title="Top Rated" movies={topRated} />
+            <Row title="Action Thrillers" movies={actionMovies} />
+            <Row title="Comedies" movies={comedyMovies} />
+            <Row title="Scary Movies" movies={horrorMovies} />
+            <Row title="Romance Movies" movies={romanceMovies} />
+            <Row title="Documentaries" movies={documentaries} />
+          </section>
 
-        <section className="container pb-32">
-          <Row title="Trending Now" movies={trendingNow} />
-          <Row title="Top Rated" movies={topRated} />
-          <Row title="Action Thrillers" movies={actionMovies} />
-          <Row title="Comedies" movies={comedyMovies} />
-          <Row title="Scary Movies" movies={horrorMovies} />
-          <Row title="Romance Movies" movies={romanceMovies} />
-          <Row title="Documentaries" movies={documentaries} />
-        </section>
       </main>
     </>
   )

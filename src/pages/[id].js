@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 // import { getSession,useSession } from "next-auth/react"
-import MovieDetails from '@/components/MovieDetails'
+import MovieDetails2 from '@/components/MovieDetails2'
 
 const MovieDetailPage = ({ movie }) => {
 
@@ -12,7 +12,7 @@ const MovieDetailPage = ({ movie }) => {
 
   return (
     <div>
-      <MovieDetails 
+      <MovieDetails2 
       movie={movie} 
       showPlayer={showPlayer}
       setShowPlayer ={setShowPlayer} 

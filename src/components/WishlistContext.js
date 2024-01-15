@@ -1,20 +1,29 @@
-import React, { createContext, useContext, useState } from 'react';
+// WishlistContext.js
+import { createContext, useContext, useState } from 'react';
 
 const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
-  const [wishlist, setWishlist] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useState([]);
 
   const addToWishlist = (movie) => {
-    setWishlist((prevWishlist) => [...prevWishlist, movie]);
+    setSelectedMovies((prevSelectedMovies) => [...prevSelectedMovies, movie]);
   };
 
   const removeFromWishlist = (movieId) => {
-    setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id !== movieId));
+    setSelectedMovies((prevSelectedMovies) =>
+      prevSelectedMovies.filter((movie) => movie.id !== movieId)
+    );
+  };
+
+  const contextValue = {
+    selectedMovies,
+    addToWishlist,
+    removeFromWishlist,
   };
 
   return (
-    <WishlistContext.Provider value={{ wishlist, addToWishlist, removeFromWishlist }}>
+    <WishlistContext.Provider value={contextValue}>
       {children}
     </WishlistContext.Provider>
   );
@@ -22,8 +31,8 @@ export const WishlistProvider = ({ children }) => {
 
 export const useWishlist = () => {
   const context = useContext(WishlistContext);
-  // if (!context) {
-  //   throw new Error('useWishlist must be used within a WishlistProvider');
-  // }
+  if (!context) {
+    throw new Error('useWishlist must be used within a WishlistProvider');
+  }
   return context;
 };

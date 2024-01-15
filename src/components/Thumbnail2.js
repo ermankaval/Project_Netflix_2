@@ -1,38 +1,30 @@
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
-import { Heart } from "lucide-react";
+import React, { useCallback } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Heart } from 'lucide-react';
+import { useWishlist } from './WishlistContext';
+
 
 const Thumbnail2 = ({ movie }) => {
-  const [isWishlist, setIsWishlist] = useState(false);
-  const [wishlist, setWishlist] = useState([]);
+  const { selectedMovies, addToWishlist, removeFromWishlist } = useWishlist();
 
-  const handleThumbnailClick = () => {
-    // Resme tıklandığında yapılacak işlemler
-    console.log("Resme tıklandı");
-  };
+  const isMovieInWishlist = selectedMovies.some((selectedMovie) => selectedMovie.id === movie.id);
 
-  const handleAddToWishlist = (e) => {
-    e.stopPropagation(); // Resme tıklandığında bu olayın parentlara iletilmesini engelle
-    setIsWishlist(!isWishlist);
-
-    // Filmi wishlist'e ekle veya çıkar
-    setWishlist((prevWishlist) => {
-      if (isWishlist) {
-        // Eğer film wishlist'te varsa, çıkar
-        return prevWishlist.filter((item) => item.id !== movie.id);
-      } else {
-        // Eğer film wishlist'te yoksa, ekle
-        return [...prevWishlist, movie];
-      }
-    });
-  };
+  const handleThumbnailClick = useCallback(() => {
+    if (isMovieInWishlist) {
+      removeFromWishlist(movie.id);
+    } else {
+      addToWishlist(movie);
+    }
+  }, [isMovieInWishlist, addToWishlist, removeFromWishlist, movie]);
 
   return (
-    <div className={`relative h-28 min-w-[180px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-110`} onClick={handleThumbnailClick}>
+    <div className={`relative h-28 min-w-[180px] ...`} onClick={handleThumbnailClick}>
       <div className="right-3 top-3 absolute z-10">
-        <button variant="outline" size="icon" onClick={handleAddToWishlist}>
-          <Heart className={`w-5 h-5 ${isWishlist ? 'text-red-500' : 'text-white'}`} />
+        <button type="button" variant="outline" size="icon">
+          <Heart
+            className={`w-5 h-5 ${isMovieInWishlist ? 'text-red-500' : 'text-white'}`}
+          />
         </button>
       </div>
       <div className="relative h-full w-full">

@@ -7,7 +7,6 @@ import { FaPlay } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 // import ReactPlayer from 'react-player';
 import dynamic from "next/dynamic";
-import { Heart, PlayCircle } from "lucide-react";
 
 
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false })

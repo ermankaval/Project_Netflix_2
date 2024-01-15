@@ -1,13 +1,16 @@
-import '@/styles/globals.css'
-import { WishlistProvider } from '@/components/WishlistContext';
+import React from 'react';
+import { WishlistProvider } from '../components/WishlistContext'
+import '@/styles/globals.css';
 
-
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <WishlistProvider>
       <Component {...pageProps} />
     </WishlistProvider>
   );
 }
+
+export default App;
+
 
 

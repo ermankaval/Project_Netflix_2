@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import Logo from './Logo';
 import { BiSearch } from "react-icons/bi";
-import { useWishlist } from '../../src/components/WishlistContext'
+import { useWishlist } from './WishlistContext';
 
-const Navbar = () => {
+const Navbar = ({mylist = [], setMyList}) => {
     const [scrolled, setScrolled] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const { wishlist } = useWishlist();
+  
 
     const handleScroll = () => {
         const isScrolled = window.scrollY > 0;
@@ -49,8 +49,8 @@ const Navbar = () => {
                         </li>
 
                         <li className='headerLink'>
-                            <Link href="/mylist">
-                                <div>My List ({wishlist.length})</div>
+                            <Link href="/MyList">
+                                <div>My List ({mylist.length})</div>
                             </Link>
                         </li>
                     </ul>
