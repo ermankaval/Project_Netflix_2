@@ -1,14 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
-import { Main } from 'next/document';
-import Logo from '@/components/Logo';
-import Navbar from '@/components/Navbar';
 import requests from "@/utils/requests";
-import Hero from '@/components/Hero';
 import Hero2 from '@/components/Hero2'; 
 import Row from '@/components/Row';
-import MovieDetails2 from '@/components/MovieDetails2';
 
 const inter = Inter({ subsets: ['latin'] })
 

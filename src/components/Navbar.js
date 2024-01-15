@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import Logo from './Logo';
 import { BiSearch } from "react-icons/bi";
-import { BsBellFill } from "react-icons/bs";
+import { useWishlist } from '../../src/components/WishlistContext'
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const { wishlist } = useWishlist();
 
     const handleScroll = () => {
         const isScrolled = window.scrollY > 0;
@@ -21,8 +22,6 @@ const Navbar = () => {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
-        // Burada arama işlemini gerçekleştirme fonksiyonunu ekleyebilirsiniz
-        console.log('Arama yapılıyor:', searchQuery);
     };
 
     useEffect(() => {
@@ -50,8 +49,8 @@ const Navbar = () => {
                         </li>
 
                         <li className='headerLink'>
-                            <Link href="/MylistPage">
-                                <div>My List</div>
+                            <Link href="/mylist">
+                                <div>My List ({wishlist.length})</div>
                             </Link>
                         </li>
                     </ul>
@@ -70,7 +69,7 @@ const Navbar = () => {
                             onChange={handleSearchChange}
                         />
                     </form>
-                    {/* <BsBellFill className="h-6 w-6" /> */}
+                 
                 </div>
             </div>
         </nav>
