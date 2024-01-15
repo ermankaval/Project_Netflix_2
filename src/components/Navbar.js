@@ -49,7 +49,11 @@ const Navbar = () => {
                             </Link>
                         </li>
 
-                        <li className='headerLink'>My List</li>
+                        <li className='headerLink'>
+                            <Link href="/MylistPage">
+                                <div>My List</div>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
 
