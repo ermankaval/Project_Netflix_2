@@ -17,7 +17,7 @@ const Thumbnail = ({ movie }) => {
     }
   }, [isMovieInWishlist, addToWishlist, removeFromWishlist, movie]);
 
-  const thumbnailSize = getThumbnailSize(); // Fonksiyonu ekledik
+  const thumbnailSize = getThumbnailSize(); 
 
   return (
     <div className="relative h-28 min-w-[180px] ...">
@@ -48,10 +48,10 @@ const Thumbnail = ({ movie }) => {
   );
 };
 
-// Ana sayfa URL'sine göre thumbnail boyutunu belirleyen fonksiyon
+
 const getThumbnailSize = () => {
   const isHomePage = window.location.pathname === '/';
-  return isHomePage ? 'w300' : 'w500'; // Ana sayfa ise w300, değilse w500 kullan
+  return isHomePage ? 'w300' : 'w500'; 
 };
 
 export default Thumbnail;

@@ -3,6 +3,7 @@ import { useWishlist } from '../components/WishlistContext';
 import Navbar from '@/components/Navbar';
 import Thumbnail from '../components/Thumbnail';
 
+
 const MyList = () => {
   const { selectedMovies } = useWishlist();
 
@@ -12,13 +13,13 @@ const MyList = () => {
       <h1 className="text-2xl font-bold mb-4" style={{ marginBottom: '26px' }}>
         My List
       </h1>
-
+      
       <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
-        {selectedMovies.map((movie) => (
-          <Thumbnail key={movie.id} movie={movie} />
-        ))}
-      </div>
+      {selectedMovies.map((movie) => (
+        <Thumbnail key={movie.id} movie={movie} />
+      ))}
     </div>
+    </div >
   );
 };
 

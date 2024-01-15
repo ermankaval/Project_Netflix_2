@@ -3,8 +3,7 @@ import { Inter } from 'next/font/google';
 import requests from "@/utils/requests";
 import Hero2 from '@/components/Hero2';
 import Row from '@/components/Row';
-import { WishlistProvider } from '@/components/WishlistContext';
-import MyList from './MyList';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
