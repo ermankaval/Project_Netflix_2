@@ -6,15 +6,16 @@ const MyListContent = () => {
   const { wishlist } = useWishlist();
 
   return (
-    
     <div>
-      <Navbar/>
-      <h1>My List</h1>
-      <ul>
-        {wishlist.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
+      <Navbar />
+      <section className="container pb-32" style={{ marginTop: '100px' }}>
+        <h1>My List</h1>
+        <ul>
+          {wishlist.map((movie) => (
+            <li key={movie.id}>{movie.title}</li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }

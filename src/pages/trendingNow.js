@@ -28,8 +28,7 @@ export default function trendingNow({
 
       <main className='relative bg-gradient-to-b from-gray-900/10 to-[#010511]' style={{ marginTop: '80px' }}>
 
-        <Navbar />
-        {/* <Hero2 moviePosters={moviePosters} /> */}
+        <Navbar />       
 
         <section className="container pb-32">
           <Row title="Trending Now" movies={trendingNow} />
