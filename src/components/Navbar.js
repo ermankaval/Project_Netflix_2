@@ -1,80 +1,90 @@
 import React, { useEffect, useState } from 'react';
-import Link from "next/link";
-import Logo from './Logo';
-import { BiSearch } from "react-icons/bi";
+import Link from 'next/link';
+import { BiSearch, BiMenu } from 'react-icons/bi';
 import { useWishlist } from './WishlistContext';
+import Logo from './Logo';
 
 const Navbar = () => {
-    const [scrolled, setScrolled] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
-    const { likedMoviesCount } = useWishlist();
-  
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { likedMoviesCount } = useWishlist();
 
-    const handleScroll = () => {
-        const isScrolled = window.scrollY > 0;
-        if (isScrolled !== scrolled) {
-            setScrolled(isScrolled);
-        }
+  const handleScroll = () => {
+    const isScrolled = window.scrollY > 0;
+    if (isScrolled !== scrolled) {
+      setScrolled(isScrolled);
+    }
+  };
+
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleMobileMenuItemClick = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
+  }, [scrolled]);
 
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
+  return (
+    <nav className={`flex items-center justify-between p-4 ${scrolled ? 'bg-black' : ''}`}>
+      <div className='container flex justify-between items-center'>
+        <Link href="/">
+          
+            <Logo style={`h-auto w-[100px] ${scrolled ? 'text-white' : 'text-black'}`} />
+        
+        </Link>
+        <ul className='hidden space-x-4 md:flex'>
+          <li className='headerLink'>TV Shows</li>
+          <li className='headerLink'>Movies</li>
+          <li className='headerLink'>
+            <Link href="/trendingNow">
+              <span className={`text-white ${scrolled ? 'hover:text-gray-300' : 'hover:text-gray-800'}`}>Trending Now</span>
+            </Link>
+          </li>
+          <li className='headerLink'>
+            <Link href="/MyList">
+              <span className={`text-white ${scrolled ? 'hover:text-gray-300' : 'hover:text-gray-800'}`}>
+                My List ({likedMoviesCount})
+              </span>
+            </Link>
+          </li>
+        </ul>
+        <div className="md:hidden" style={{ marginRight: '10px' }}> {/* Sağa olan boşluğu ayarlayabilirsiniz */}
+          <button
+            className="text-white focus:outline-none"
+            onClick={handleMobileMenuToggle}
+          >
+            <BiMenu className="h-6 w-6 cursor-pointer" />
+          </button>
+        </div>
+      </div>
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [scrolled]);
-
-    return (
-        <nav className={scrolled ? 'bg-black' : ''}>
-            <div className='container flex justify-between'>
-                <div className='flex items-center space-x-2 md:space-x-10'>
-                    <Link href="/">
-                        <Logo style="h-auto w-[100px]" />
-                    </Link>
-                    <ul className='hidden space-x-4 md:flex'>
-                        <li className='headerLink'>TV Shows</li>
-                        <li className='headerLink'>Movies</li>
-                        <li className='headerLink'>
-                            <Link href="/trendingNow">
-                                <div>Trending Now</div>
-                            </Link>
-                        </li>
-
-                        <li className='headerLink'>
-                            <Link href="/MyList">
-                                <div>My List ({likedMoviesCount})</div>
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-
-                {/* <div className="flex items-center space-x-4 text-sm font-light">
-                    <form onSubmit={handleSearchSubmit}>
-                        <BiSearch
-                            className={`sm:hidden h-6 w-6 sm:inline cursor-pointer`}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Search for movies..."
-                            className={`border rounded-md p-2 outline-none ${scrolled ? 'text-white' : ''}`}
-                            value={searchQuery}
-                            onChange={handleSearchChange}
-                        />
-                    </form>
-                 
-                </div> */}
-            </div>
-        </nav>
-    );
+      <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} fixed top-0 right-0 w-3/4 h-full bg-gray-800 bg-opacity-75 overflow-y-auto`}>
+        <ul className="flex flex-col space-y-4 p-4">
+          <li onClick={handleMobileMenuItemClick}>
+            <Link href="/trendingNow">
+              <span className={`text-white ${scrolled ? 'hover:text-gray-300' : 'hover:text-gray-800'}`}>Trending Now</span>
+            </Link>
+          </li>
+          <li onClick={handleMobileMenuItemClick}>
+            <Link href="/MyList">
+              <span className={`text-white ${scrolled ? 'hover:text-gray-300' : 'hover:text-gray-800'}`}>
+                My List ({likedMoviesCount})
+              </span>
+            </Link>
+          </li>
+          {/* Diğer menü öğeleri ekleyebilirsiniz */}
+        </ul>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;
