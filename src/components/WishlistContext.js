@@ -1,29 +1,25 @@
 // WishlistContext.js
-import { createContext, useContext, useState } from 'react';
+
+import React, { createContext, useContext, useState } from 'react';
 
 const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const [selectedMovies, setSelectedMovies] = useState([]);
+  const [likedMoviesCount, setLikedMoviesCount] = useState(0); // Eklenen satır
 
   const addToWishlist = (movie) => {
     setSelectedMovies((prevSelectedMovies) => [...prevSelectedMovies, movie]);
+    setLikedMoviesCount((prevCount) => prevCount + 1); // Eklenen satır
   };
 
   const removeFromWishlist = (movieId) => {
-    setSelectedMovies((prevSelectedMovies) =>
-      prevSelectedMovies.filter((movie) => movie.id !== movieId)
-    );
-  };
-
-  const contextValue = {
-    selectedMovies,
-    addToWishlist,
-    removeFromWishlist,
+    setSelectedMovies((prevSelectedMovies) => prevSelectedMovies.filter((movie) => movie.id !== movieId));
+    setLikedMoviesCount((prevCount) => prevCount - 1); // Eklenen satır
   };
 
   return (
-    <WishlistContext.Provider value={contextValue}>
+    <WishlistContext.Provider value={{ selectedMovies, addToWishlist, removeFromWishlist, likedMoviesCount }}> {/* Eklenen satır */}
       {children}
     </WishlistContext.Provider>
   );

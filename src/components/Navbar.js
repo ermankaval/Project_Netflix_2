@@ -4,9 +4,10 @@ import Logo from './Logo';
 import { BiSearch } from "react-icons/bi";
 import { useWishlist } from './WishlistContext';
 
-const Navbar = ({mylist = [], setMyList}) => {
+const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const { likedMoviesCount } = useWishlist();
   
 
     const handleScroll = () => {
@@ -50,7 +51,7 @@ const Navbar = ({mylist = [], setMyList}) => {
 
                         <li className='headerLink'>
                             <Link href="/MyList">
-                                <div>My List ({mylist.length})</div>
+                                <div>My List ({likedMoviesCount})</div>
                             </Link>
                         </li>
                     </ul>

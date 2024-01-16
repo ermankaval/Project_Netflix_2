@@ -26,7 +26,7 @@ export default function trendingNow({
       </Head>
 
 
-      <main className='relative bg-gradient-to-b from-gray-900/10 to-[#010511]' style={{ marginTop: '80px' }}>
+      <main className='relative backgroundColor: #000 from-gray-900/10 to-[#010511]' style={{ marginTop: '80px' }}>
 
         <Navbar />       
 
