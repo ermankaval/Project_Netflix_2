@@ -11,6 +11,14 @@ const Thumbnail2 = ({ movie }) => {
   const isMovieInWishlist = selectedMovies.some((selectedMovie) => selectedMovie.id === movie.id);
 
   const handleThumbnailClick = useCallback(() => {
+    // if (isMovieInWishlist) {
+    //   removeFromWishlist(movie.id);
+    // } else {
+    //   addToWishlist(movie);
+    // }
+  }, [isMovieInWishlist, addToWishlist, removeFromWishlist, movie]);
+
+  const handleHeartClick = useCallback(() => {
     if (isMovieInWishlist) {
       removeFromWishlist(movie.id);
     } else {
@@ -19,7 +27,7 @@ const Thumbnail2 = ({ movie }) => {
   }, [isMovieInWishlist, addToWishlist, removeFromWishlist, movie]);
 
   return (
-    <div className={`relative h-28 min-w-[180px] ...`} onClick={handleThumbnailClick}>
+    <div className={`relative h-28 min-w-[180px] ...`} onClick={handleHeartClick}>
       <div className="right-3 top-3 absolute z-10">
         <button type="button" variant="outline" size="icon">
           <Heart
