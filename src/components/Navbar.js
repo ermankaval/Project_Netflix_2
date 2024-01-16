@@ -57,7 +57,7 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                <div className="flex items-center space-x-4 text-sm font-light">
+                {/* <div className="flex items-center space-x-4 text-sm font-light">
                     <form onSubmit={handleSearchSubmit}>
                         <BiSearch
                             className={`sm:hidden h-6 w-6 sm:inline cursor-pointer`}
@@ -71,7 +71,7 @@ const Navbar = () => {
                         />
                     </form>
                  
-                </div>
+                </div> */}
             </div>
         </nav>
     );
